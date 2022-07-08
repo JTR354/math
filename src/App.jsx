@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route path="" element={<Welcome />} />
         <Route path="math">
           <Route path=":count" element={<Math />} />
         </Route>
