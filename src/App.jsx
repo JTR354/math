@@ -1,7 +1,7 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 
-import Math from "./pages/Math";
+import Maths from "./pages/Math";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="" element={<Welcome />} />
         <Route path="math">
-          <Route path=":count" element={<Math />} />
+          <Route path=":count/:key" element={<Maths />} />
         </Route>
         <Route
           path="*"
