@@ -14,6 +14,7 @@ function createQuestion() {
   if (questions) {
     return [key, JSON.parse(questions)];
   }
+  questions = {};
   EQUATION_TYPE.forEach((it) => {
     questions[it] = [];
     new Array(200).fill(1).forEach(() => {
