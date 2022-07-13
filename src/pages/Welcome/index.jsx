@@ -3,34 +3,38 @@ import logo from "../../logo.svg";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import createEquation from "../../util/createEquation";
+import createSeniorEquation, {
+  LEVEL_NORMAL,
+} from "../../util/createSeniorEquation";
 import createTime, { getNowTime } from "../../util/createTime";
-
 const EQUATION_TYPE = [20, 50, 100];
+const EQUATION_TYPE_SENIOR = [LEVEL_NORMAL];
 
-function createQuestion() {
+function createQuestion(arr, createFn) {
   const [year, month, day] = createTime();
-  const key = year + month + day;
-  let questions = sessionStorage.getItem(key);
+  const key = year + month + day + "-" + arr.join("");
+  let questions = localStorage.getItem(key);
   if (questions) {
     return [key, JSON.parse(questions)];
   }
   questions = {};
-  EQUATION_TYPE.forEach((it) => {
+  arr.forEach((it) => {
     questions[it] = [];
     new Array(200).fill(1).forEach(() => {
-      questions[it].push(createEquation(it));
+      questions[it].push(createFn(it));
     });
   });
-  sessionStorage.setItem(key, JSON.stringify(questions));
+  localStorage.setItem(key, JSON.stringify(questions));
   return [key, questions];
 }
 
-const [questionsKey] = createQuestion();
+const [questionsKey] = createQuestion(EQUATION_TYPE, createEquation);
+
+const [seniorKey] = createQuestion(EQUATION_TYPE_SENIOR, createSeniorEquation);
 
 function App() {
   const [count, setCount] = useState(99);
   const [now, setNow] = useReducer(getNowTime, getNowTime());
-
   useEffect(() => {
     const timer = setInterval(() => {
       setNow();
@@ -43,7 +47,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Link to={`math/${LEVEL_NORMAL}/${seniorKey}`}>
+          <img src={logo} className="App-logo" alt="logo" />
+        </Link>
         <p>{now}</p>
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>

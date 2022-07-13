@@ -12,7 +12,7 @@ const Maths = (props) => {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
   const questions = useMemo(() => {
-    const q = JSON.parse(sessionStorage.getItem(key)) || {};
+    const q = JSON.parse(localStorage.getItem(key)) || {};
     return q[count] || [];
   }, [key]);
 
