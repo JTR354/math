@@ -18,6 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:github": "cross-env PUBLIC_URL=/math/  react-scripts build",
+    "ci": "./deploy.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
