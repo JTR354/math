@@ -10,7 +10,7 @@ jobs:
     if: github.repository == 'JTR354/math'
     steps:
       - name: Sync to Gitee
-        uses: JTR354/git-mirror-action@master
+        uses: JTR354/math@master
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
         with:
