@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+
+      function App() {
+        const [list, setList] = React.useState([]);
+
+        return (
+          <main>
+            <Panel
+              onEnter={(value, setValue) => {
+                if (!value) return;
+                const data = {
+                  id: String(Math.random()).slice(-6),
+                  text: value,
+                };
+                setValue("");
+                setList((arr) => arr.concat(data));
+              }}
+            />
+            <List
+              list={list}
+              onDelete={(it) => {
+                setList((arr) => arr.filter((li) => li.id !== it.id));
+              }}
+            />
+          </main>
+        );
+      }
+
+      function Panel({ onEnter }) {
+        const [value, setValue] = React.useState("");
+        return (
+          <div>
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.code === "Enter") {
+                  onEnter(value, setValue);
+                }
+              }}
+            />
+          </div>
+        );
+      }
+
+      function List({ list, onDelete }) {
+        return (
+          <ul>
+            {list.map((it) => {
+              return (
+                <li key={it.id}>
+                  {it.text}{" "}
+                  <button
+                    onClick={() => {
+                      onDelete(it);
+                    }}
+                  >
+                    删除
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        );
+      }
+    </script>
+  </body>
+</html>

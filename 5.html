@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" /><button>输入</button>
+    <ul></ul>
+    <script>
+      var input = document.querySelector("input");
+      var btn = document.querySelector("button");
+      var ul = document.querySelector("ul");
+      btn.addEventListener("click", function () {
+        var li = document.createElement("li");
+        li.innerHTML = input.value + "<a href='#'>删除</a>";
+        ul.appendChild(li);
+      });
+
+      for (var i = 0; i < as.length; i++) {
+        as[i].addEventListener("click", function () {
+          ul.removeChild(this.parentNode);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<script>
+  function fn() {
+    var n = 1;
+    return function () {
+      return n++;
+    };
+  }
+  var a = fn();
+  console.log(a());
+  console.log(a());
+  console.log(a());
+
+  var obj = { a: 123 };
+  function b1() {
+    obj.a = 666;
+  }
+  console.log(obj.a);
+
+  function b2(o) {
+    o = null;
+  }
+  console.log(obj.a);
+</script>
