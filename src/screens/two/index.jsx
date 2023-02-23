@@ -1,5 +1,9 @@
 import { useState, useMemo } from "react";
 import * as React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -12,6 +16,7 @@ import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
+import MainSection from "./main";
 
 import success from "./ok.jpeg";
 
@@ -44,8 +49,23 @@ const Two = (props) => {
         </Row>
       </Stack>
     );
-    return;
   }
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container fixed>
+        <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+          <MainSection
+            key={problem.toString()}
+            problem={problem}
+            visible={toggle}
+            onSubmit={onSubmit}
+            score={score}
+          />
+        </Box>
+      </Container>
+    </React.Fragment>
+  );
   return (
     <Main>
       {/* <Paper elevation={3}> */}
@@ -192,7 +212,7 @@ const Item = styled(Paper)`
 const width = `50vw`;
 const height = `50vh`;
 const FlipContainer = styled.div`
-  perspective: 100;
+  perspective: 1000px;
   width: ${width};
   height: ${height};
   &.hover {
